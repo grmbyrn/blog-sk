@@ -2,6 +2,7 @@
 	import Post from "../Post.svelte";
 	export let title = "How pages work in SvelteKit";
 	export let date = new Date("2023-02-04");
+	export let image = 'https://images.unsplash.com/photo-1736771932149-26287a969645?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
 </script>
 
 <Post {title} {date}>

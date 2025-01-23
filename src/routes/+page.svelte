@@ -1,48 +1,62 @@
 <script lang="ts">
 	export let data;
 	const { posts } = data;
-	console.log(posts)
 </script>
 
 <svelte:head>
-	<title>Blog with SvelteKit without marekdown</title>
+	<title>Blog with SvelteKit without markdown</title>
 </svelte:head>
 
-<section>
-	<h2>All Posts</h2>
-
-	<ul>
+<div class="container">
+	<div class="header">
+		<h2>All Posts</h2>
+	</div>
+	<div class="grid">
 		{#each posts as post}
-			<li>
-				<a href="/post/{post.link}">
-					{#if post.image}
-						<img src={post.image} alt="">
-					{/if}
-					{post.title}
-				</a>
-				&ndash;
-				<span class="date"
-					>{post.date.toLocaleDateString()}</span
-				>
-			</li>
+		<div class="link">
+			<a href="/post/{post.link}">
+				{#if post.image}
+					<img src={post.image} alt="">
+				{/if}
+				{post.title}
+			</a>
+		</div>
 		{/each}
-	</ul>
-	<p>
-		Check out the code on <a
-			href="https://github.com/ScriptRaccoon/blog-sveltekit-approach"
-			target="_blank"
-		>
-			GitHub</a
-		>.
-	</p>
-</section>
+	</div>
+</div>
 
 <style>
-	ul {
-		margin-left: 1rem;
+	.container {
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin: 0 auto;
+		padding-top: 3rem;
+		background: rgba(26, 26, 26, 1);
+		color: rgba(245, 245, 245, 0.96);
+		padding-bottom: 64px;		
 	}
 	
 	img{
 		height: 150px;
+	}
+
+	.grid {
+		display: grid;
+		padding-top: 3rem;
+		padding-inline: 2.5rem;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 24px;
+		width: 100%;
+		flex-grow: 1;
+	}
+
+	a{
+		display: flex;
+		flex-direction: column;
+		color: white;
+		text-decoration: none;
 	}
 </style>

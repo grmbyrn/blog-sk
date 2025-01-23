@@ -11,7 +11,9 @@
 
 <span class="date">{date.toLocaleDateString()}</span>
 
-<slot />
+<main>
+	<slot />
+</main>
 <p>
 	<a href="/">All Posts</a>
 </p>
