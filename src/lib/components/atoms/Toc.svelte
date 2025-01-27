@@ -55,7 +55,6 @@
 			top: 0;
 			z-index: 100;
 			background-color: inherit;
-			border: 1px solid red;
 		}
 	}
 </style>

@@ -1,7 +1,8 @@
 <script lang="ts">
 	export let data;
 	const { posts } = data;
-    console.log(posts)
+	console.log(posts)
+	import BlogPreview from '$lib/components/molecules/BlogPreview.svelte';
 </script>
 
 <svelte:head>
@@ -14,19 +15,18 @@
 	</div>
 	<div class="grid">
 		{#each posts as post}
-		<div class="link">
 			<a href="/blog/{post.link}">
 				{#if post.image}
-					<img src={post.image} alt="">
+					<BlogPreview post_data={post} />
 				{/if}
-				{post.title}
 			</a>
-		</div>
 		{/each}
 	</div>
 </div>
 
-<style>
+<style lang="scss">
+	@use '$lib/scss/breakpoints.scss' as bp;
+
 	.container {
 		min-height: 100vh;
 		display: flex;
@@ -37,11 +37,37 @@
 		padding-top: 3rem;
 		background: rgba(26, 26, 26, 1);
 		color: rgba(245, 245, 245, 0.96);
-		padding-bottom: 64px;		
+		padding-bottom: 64px;
+
+		@include bp.for-desktop-up {
+			max-width: 1176px;
+		}
 	}
-	
-	img{
-		height: 150px;
+
+	.header {
+		margin: 0 auto;
+
+		@include bp.for-tablet-portrait-up {
+			width: 700px;
+		}
+
+		@include bp.for-desktop-up {
+			width: 1100px;
+		}
+
+		h1 {
+			padding-bottom: 1rem;
+			font-size: 36px;
+
+			@include bp.for-tablet-portrait-up {
+				padding-bottom: 0px;
+			}
+		}
+
+		@include bp.for-tablet-portrait-up {
+			display: flex;
+			justify-content: space-between;
+		}
 	}
 
 	.grid {
@@ -52,12 +78,18 @@
 		grid-gap: 24px;
 		width: 100%;
 		flex-grow: 1;
-	}
 
-	a{
-		display: flex;
-		flex-direction: column;
-		color: white;
-		text-decoration: none;
+		@include bp.for-phone-only {
+			grid-template-columns: 1fr;
+		}
+
+		@include bp.for-tablet-landscape-up {
+			grid-template-columns: 1fr 1fr;
+		}
+
+		@include bp.for-desktop-up {
+			grid-template-columns: 1fr 1fr 1fr;
+		}
 	}
 </style>
+

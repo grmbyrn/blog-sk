@@ -12,7 +12,7 @@
 	let { tree = [], activeHeadingIdxs, item, level = 1 }: Props = $props();
 </script>
 
-<ul class="mt-0 pl-0 list-none {level !== 1 ? 'pl-4' : ''}">
+<ul class="mt-0 list-none {level !== 1 ? 'pl-4' : ''}">
 	{#if tree && tree.length}
 		{#each tree as heading, i (i)}
 			<li class="mt-0 pt-2">
@@ -37,12 +37,8 @@
 </ul>
 
 <style>
-	a{
-		border: 1px solid red;
-	}
-
 	ul {
-		list-style-type: none;
-		margin: 0;
-	}
+	  list-style-type: none;
+	  margin: 0;
+	}	
 </style>

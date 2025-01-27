@@ -12,7 +12,6 @@
 	};
 
 	let filteredPosts = data.posts;
-	console.log(data.posts)
 </script>
 
 <Hero />

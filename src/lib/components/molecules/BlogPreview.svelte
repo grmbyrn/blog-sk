@@ -9,7 +9,7 @@
 <div class="container">
 	<div class="grid">
 		<div class="image-container">
-			<img src={post_data.coverImage} alt={post_data.title} />
+			<img src={post_data.image} alt={post_data.title} />
 		</div>
 		<div class="text-container">
 			<h2>{post_data.title}</h2>
