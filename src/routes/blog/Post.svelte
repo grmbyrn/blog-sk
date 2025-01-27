@@ -50,7 +50,7 @@
 					{/key}
 				</div>
 			{/if}
-			<div>
+			<div class='layout'>
 				<slot />
 			</div>
 		</article>
@@ -59,6 +59,21 @@
 
 <style lang="scss">
 	@use '$lib/scss/breakpoints.scss' as bp;
+
+	.layout {
+		display: flex;
+		flex-direction: column;
+		padding-top: 4rem;
+		padding-inline: 2.5rem;
+	}
+
+	@include bp.for-desktop-up {
+		.layout {
+			height: 100%;
+			flex-direction: row;
+			gap: 4rem;
+		}
+	}
 
 	.container {
 		background: rgba(26, 26, 26, 1);
