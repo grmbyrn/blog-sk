@@ -7,7 +7,7 @@
 	export let excerpt: string;
 	export let image: string;
 	export let tags: string[];
-	
+
 	import { formatDate } from '$lib/utils/date';
 	import Image from '$lib/components/atoms/Image.svelte';
 	import ShareButton from '$lib/components/singletons/ShareButton.svelte';
@@ -33,14 +33,12 @@
 				<div class="note">
 					<div>
 						{#if contributor}
-								<a class="author" href={'/contributor/' + contributorSlug}
-									>{contributor}</a
-								>
-								-
-							{/if}
-							{formatDate(date)}
+							<a class="author" href={'/contributor/' + contributorSlug}>{contributor}</a>
+							-
+						{/if}
+						{formatDate(date)}
 					</div>
-					<ShareButton slug={slug} title={title} />
+					<ShareButton {slug} {title} />
 				</div>
 			</div>
 			{#if image}
@@ -50,7 +48,7 @@
 					{/key}
 				</div>
 			{/if}
-			<div class='layout'>
+			<div class="layout">
 				<slot />
 			</div>
 		</article>
@@ -60,25 +58,11 @@
 <style lang="scss">
 	@use '$lib/scss/breakpoints.scss' as bp;
 
-	.layout {
-		display: flex;
-		flex-direction: column;
-		padding-top: 4rem;
-		padding-inline: 2.5rem;
-	}
-
-	@include bp.for-desktop-up {
-		.layout {
-			height: 100%;
-			flex-direction: row;
-			gap: 4rem;
-		}
-	}
-
 	.container {
 		background: rgba(26, 26, 26, 1);
 		color: rgba(245, 245, 245, 0.96);
 		margin: 0 auto;
+		max-width: 1100px;
 	}
 
 	#article-content {

@@ -6,17 +6,35 @@
 	import type { BlogPost, Contributor } from '$lib/utils/types';
 
 	export let data: {
-		posts: BlogPost[];
+		posts: any;
 		allContributors: Contributor[];
 		error: string | null;
 	};
-
 	let filteredPosts = data.posts;
+	console.log(filteredPosts[0].slug);
 </script>
 
 <Hero />
 <WhyContribute />
 <Contributors contributors={data.allContributors} error={data.error} />
+
+{#if filteredPosts && filteredPosts.length > 0}
+	<div class="container">
+		<h2>Latest articles</h2>
+		<div class="grid">
+			{#each filteredPosts as post}
+				<a href="/blog/{post.link}">
+					{#if post.image}
+						<BlogPreview post_data={post} />
+					{/if}
+				</a>
+			{/each}
+		</div>
+		<div class="link-container">
+			<a href="/blog">All articles</a>
+		</div>
+	</div>
+{/if}
 
 <!-- {#if filteredPosts && filteredPosts.length > 0}
 	<div class="container">

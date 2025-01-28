@@ -38,7 +38,6 @@
 
 <style>
 	ul {
-	  list-style-type: none;
-	  margin: 0;
-	}	
+		margin: 0;
+	}
 </style>

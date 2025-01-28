@@ -2,7 +2,7 @@ interface MarkdownPost {
 	metadata: {
 		title: string;
 		date: string;
-		image: string
+		image: string;
 	};
 	default: string;
 }

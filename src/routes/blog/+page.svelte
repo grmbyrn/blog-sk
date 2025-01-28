@@ -1,7 +1,6 @@
 <script lang="ts">
 	export let data;
 	const { posts } = data;
-	console.log(posts)
 	import BlogPreview from '$lib/components/molecules/BlogPreview.svelte';
 </script>
 
@@ -92,4 +91,3 @@
 		}
 	}
 </style>
-
