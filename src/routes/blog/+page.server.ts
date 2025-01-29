@@ -5,15 +5,15 @@ export const load = async () => {
 
 	const unsorted_posts = await Promise.all(
 		posts_paths.map(async (path) => {
-			const link = path.split('/').at(-2) ?? '';
-			const metadata = postsMetadata[link] || { title: 'Unknown Title', date: '', image: '' };
+			const slug = path.split('/').at(-2) ?? '';
+			const metadata = postsMetadata[slug] || { title: 'Unknown Title', date: '', image: '' };
 
 			const validDate = new Date(metadata.date);
 			if (isNaN(validDate.getTime())) {
-				throw new Error(`Invalid date in post: ${link}`);
+				throw new Error(`Invalid date in post: ${slug}`);
 			}
 
-			return { link, title: metadata.title, date: validDate, image: metadata.image };
+			return { slug, title: metadata.title, date: validDate, coverImage: metadata.coverImage };
 		})
 	);
 

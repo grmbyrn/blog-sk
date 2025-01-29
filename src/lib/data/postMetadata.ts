@@ -5,21 +5,21 @@ export const postsMetadata: {
 		contributor: string;
 		contributorSlug: string;
 		date: string;
-		image: string;
+		coverImage: string;
 		excerpt: string;
 		tags: string[];
 	};
 } = {
-	'first-post': {
-		title: 'First Post',
-		slug: 'first-post',
+	'live-demo-beta-v3': {
+		title: 'Announcing the Beta v3.0.0 Live Demo',
+		slug: 'live-demo-beta-v3',
 		contributor: 'Jose Celano',
 		contributorSlug: 'jose-celano',
-		date: '2023-04-22T21:55:15.361Z',
-		image:
-			'https://plus.unsplash.com/premium_photo-1736798695947-2c7661f72bc8?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-		excerpt: 'This is the first post.',
-		tags: []
+		date: '2023-12-15T12:08:04.295Z',
+		coverImage:
+			'/images/posts/rust-crab-happy.jpg',
+		excerpt: "We will release a new major version v3.0.0. We want the community to test it before the final release while it's still in Beta. You can contribute to make Torrust better.",
+		tags: ['Announcement', 'Demo']
 	},
 	'how-to-contribute-to-this-site': {
 		title: 'How To Contribute To This Site',
@@ -27,7 +27,7 @@ export const postsMetadata: {
 		contributor: 'Jose Celano',
 		contributorSlug: 'jose-celano',
 		date: '2023-04-22T21:55:15.361Z',
-		image: '/images/posts/sample-post.jpg',
+		coverImage: '/images/posts/sample-post.jpg',
 		excerpt: 'How to manage existing blog posts and create new ones on this site.',
 		tags: ['Documentation']
 	}

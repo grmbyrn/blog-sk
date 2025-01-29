@@ -5,12 +5,13 @@
 	export let contributorSlug: string;
 	export let date: string;
 	export let excerpt: string;
-	export let image: string;
+	export let coverImage: string;
 	export let tags: string[];
 
 	import { formatDate } from '$lib/utils/date';
 	import Image from '$lib/components/atoms/Image.svelte';
 	import ShareButton from '$lib/components/singletons/ShareButton.svelte';
+	import Tag from '$lib/components/atoms/Tag.svelte';
 </script>
 
 <svelte:head>
@@ -24,7 +25,9 @@
 				{#if tags.length}
 					<div class="tags">
 						{#each tags as tag}
-							{tag}
+							<Tag {tag}>
+								{tag}
+							</Tag>
 						{/each}
 					</div>
 				{/if}
@@ -41,10 +44,10 @@
 					<ShareButton {slug} {title} />
 				</div>
 			</div>
-			{#if image}
+			{#if coverImage}
 				<div class="cover-image">
-					{#key image}
-						<Image src={image + '?v=' + slug} alt={title} />
+					{#key coverImage}
+						<Image src={coverImage + '?v=' + slug} alt={title} />
 					{/key}
 				</div>
 			{/if}

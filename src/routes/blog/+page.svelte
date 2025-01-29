@@ -14,8 +14,8 @@
 	</div>
 	<div class="grid">
 		{#each posts as post}
-			<a href="/blog/{post.link}">
-				{#if post.image}
+			<a href="/blog/{post.slug}">
+				{#if post.coverImage}
 					<BlogPreview post_data={post} />
 				{/if}
 			</a>

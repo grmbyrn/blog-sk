@@ -5,21 +5,25 @@
 	import Callout from '$lib/components/molecules/Callout.svelte';
 	import CodeBlock from '$lib/components/molecules/CodeBlock.svelte';
 	import Toc from '$lib/components/atoms/Toc.svelte';
+    import PrevNextPost from '$lib/components/singletons/PrevNextPost.svelte';
+    import PagesWrapper from '$lib/components/atoms/PagesWrapper.svelte';
 
 	const folderName = import.meta.url.split('/').slice(-2, -1)[0];
 	const meta = postsMetadata[folderName];
+    console.log(postsMetadata)
 </script>
 
 <Post
 	title={meta.title}
 	slug={meta.slug}
-	image={meta.image}
+	coverImage={meta.coverImage}
 	date={meta.date}
 	tags={meta.tags}
 	excerpt={meta.excerpt}
 	contributor={meta.contributor}
 	contributorSlug={meta.contributorSlug}
 >
+<PagesWrapper heading='Table of Contents'>
 	<div class="wrapper">
 		<Toc class="toc" />
 		<div id="toc-contents" class="content-preview">
@@ -127,6 +131,7 @@ tags:
 			</p>
 		</div>
 	</div>
+</PagesWrapper>
 </Post>
 
 <style lang="scss">
