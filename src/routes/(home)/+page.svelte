@@ -11,7 +11,6 @@
 		error: string | null;
 	};
 	let filteredPosts = data.posts;
-	console.log(filteredPosts)
 </script>
 
 <Hero />

@@ -10,7 +10,6 @@
 
 	const folderName = import.meta.url.split('/').slice(-2, -1)[0];
 	const meta = postsMetadata[folderName];
-    console.log(postsMetadata)
 </script>
 
 <Post
