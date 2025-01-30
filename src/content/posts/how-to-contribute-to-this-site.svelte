@@ -1,5 +1,5 @@
 <script lang="ts">
-    export let data;
+    export let content;
 	import Post from '$lib/components/organisms/Post.svelte';
 	import Image from '$lib/components/atoms/Image.svelte';
 	import Callout from '$lib/components/molecules/Callout.svelte';
@@ -7,19 +7,17 @@
 	import Toc from '$lib/components/atoms/Toc.svelte';
     import PrevNextPost from '$lib/components/singletons/PrevNextPost.svelte';
     import PagesWrapper from '$lib/components/atoms/PagesWrapper.svelte';
-
-    console.log(data)
 </script>
 
 <Post
-	title={data.meta.title}
-	slug={data.meta.slug}
-	coverImage={data.meta.coverImage}
-	date={data.meta.date}
-	tags={data.meta.tags}
-	excerpt={data.meta.excerpt}
-	contributor={data.meta.contributor}
-	contributorSlug={data.meta.contributorSlug}
+	title={content.meta.title}
+	slug={content.meta.slug}
+	coverImage={content.meta.coverImage}
+	date={content.meta.date}
+	tags={content.meta.tags}
+	excerpt={content.meta.excerpt}
+	contributor={content.meta.contributor}
+	contributorSlug={content.meta.contributorSlug}
 >
 <PagesWrapper heading='Table of Contents'>
 	<div class="wrapper">
