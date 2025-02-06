@@ -1,7 +1,22 @@
 <script lang="ts">
-	export let data;
-	const { posts } = data;
+	import { postsMetadata } from '$lib/data/postMetadata';
 	import BlogPreview from '$lib/components/molecules/BlogPreview.svelte';
+	import SearchBar from '$lib/components/singletons/SearchBar.svelte';
+	// Convert posts object to array
+    let allPosts = Object.values(postsMetadata);
+    let filteredPosts = allPosts;
+    function handleSearch(event: CustomEvent<string>) {
+        const searchTerm = event.detail.toLowerCase();
+        
+        if (!searchTerm) {
+            filteredPosts = allPosts;
+            return;
+        }
+        filteredPosts = allPosts.filter(post => 
+            post.title.toLowerCase().includes(searchTerm) ||
+            post.excerpt.toLowerCase().includes(searchTerm)
+        );
+    }
 </script>
 
 <svelte:head>
@@ -11,9 +26,10 @@
 <div class="container">
 	<div class="header">
 		<h2>All Posts</h2>
+		<SearchBar on:search={handleSearch} />
 	</div>
 	<div class="grid">
-		{#each posts as post}
+		{#each filteredPosts as post}
 			<a href="/blog/{post.slug}">
 				{#if post.coverImage}
 					<BlogPreview post_data={post} />
@@ -44,7 +60,15 @@
 	}
 
 	.header {
+		display: flex;
+		justify-content: space-between;
+		gap: 10px;
 		margin: 0 auto;
+
+		@include bp.for-phone-only {
+			flex-direction: column;
+			text-align: center;
+		}
 
 		@include bp.for-tablet-portrait-up {
 			width: 700px;
