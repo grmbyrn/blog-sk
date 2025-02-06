@@ -8,7 +8,7 @@
     import PrevNextPost from '$lib/components/singletons/PrevNextPost.svelte';
     import PagesWrapper from '$lib/components/atoms/PagesWrapper.svelte';
 
-    console.log(data)
+    console.log(data.allMetadata)
 </script>
 
 <Post
@@ -130,6 +130,7 @@ tags:
 		</div>
 	</div>
 </PagesWrapper>
+<PrevNextPost currentPage={data.meta.slug} {data} />
 </Post>
 
 <style lang="scss">
