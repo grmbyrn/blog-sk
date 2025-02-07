@@ -22,7 +22,7 @@
 <a href="https://www.pexels.com/photo/shallow-focus-photography-of-black-and-silver-compasses-on-top-of-map-1203808">
     Photo by Alex Andrews.
 </a>
-    <PagesWrapper heading='Table of Contents'>
+    <PagesWrapper >
         <div class="wrapper">
             <Toc class="toc" />
             <div id="toc-contents" class="content-preview">

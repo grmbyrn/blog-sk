@@ -17,7 +17,7 @@
 	contributor={data.meta.contributor}
 	contributorSlug={data.meta.contributorSlug}
 >
-	<PagesWrapper heading='Table of Contents'>
+	<PagesWrapper>
 		<div class="wrapper">
 			<Toc class="toc" />
 			<div id="toc-contents" class="content-preview">

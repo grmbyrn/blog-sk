@@ -19,7 +19,7 @@ export const postsMetadata: {
 		coverImage:
 			'/images/posts/rust-crab-happy.jpg',
 		excerpt: "We will release a new major version v3.0.0. We want the community to test it before the final release while it's still in Beta. You can contribute to make Torrust better.",
-		tags: ['Announcement', 'Demo']
+		tags: ['Announcement', 'Demo', 'Documentation']
 	},
 	'how-to-contribute-to-this-site': {
 		title: 'How To Contribute To This Site',

@@ -1,10 +1,10 @@
 <script lang="ts">
 	interface Props {
-		heading: string;
+		heading?: string;
 		children?: import('svelte').Snippet;
 	}
 
-	let { heading, children }: Props = $props();
+	let { heading = '', children }: Props = $props();
 </script>
 
 <div class="para">

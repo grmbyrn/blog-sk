@@ -12,6 +12,7 @@
 	import Image from '$lib/components/atoms/Image.svelte';
 	import ShareButton from '$lib/components/singletons/ShareButton.svelte';
 	import Tag from '$lib/components/atoms/Tag.svelte';
+	console.log(tags)
 </script>
 
 <svelte:head>

@@ -1,120 +1,115 @@
 <script lang="ts">
-	import { HttpRegex } from '$lib/utils/regex';
-
-	interface Props {
-		additionalClass?: string | undefined;
-		href?: string | undefined;
-		target?: '_self' | '_blank';
-		rel?: any;
-		image?: import('svelte').Snippet;
-		content?: import('svelte').Snippet;
-		footer?: import('svelte').Snippet;
-		[key: string]: any;
-	}
-
-	let {
-		additionalClass = undefined,
-		href = undefined,
-		target = undefined,
-		rel = undefined,
-		image,
-		content,
-		footer,
-		...rest
-	}: Props = $props();
-
-	const isExternalLink = !!href && HttpRegex.test(href);
-
-	target = isExternalLink ? '_blank' : '_self';
-	rel = isExternalLink ? 'noopener noreferrer' : undefined;
-
-	let tag = $derived(href ? 'a' : 'article');
-	let linkProps = $derived({
-		href,
-		target,
-		rel
-	});
+    export let filteredPosts
+    import { formatDate } from '$lib/utils/date';
 </script>
 
-<svelte:element
-	this={tag}
-	class="card {additionalClass}"
-	{...linkProps}
-	data-sveltekit-preload-data
-	{...rest}
->
-	{#if image}
-		<div class="image">
-			{@render image?.()}
-		</div>
-	{/if}
-	<div class="body">
-		<div class="content">
-			{@render content?.()}
-		</div>
-		{#if footer}
-			<div class="footer">
-				{@render footer?.()}
-			</div>
-		{/if}
-	</div>
-</svelte:element>
+<div class="posts">
+    {#each filteredPosts as post}
+        {#if post.tags}
+            <a href={`/blog/${post.slug}`} class="post-card">
+                {#if post.coverImage}
+                    <div class="image-container">
+                        <img src={post.coverImage} alt="Cover for {post.title}" />
+                    </div>
+                {/if}
+                <div class="content">
+                    <p class="title">{post.title}</p>
+                    {#if post.date}
+                        <div class="date">Published {formatDate(post.date)}</div>
+                    {/if}
+                    {#if post.excerpt}
+                        <p class="excerpt">{post.excerpt}</p>
+                    {/if}
+                </div>
+            </a>
+        {/if}
+    {/each}
+</div>
 
 <style lang="scss">
-	.card {
-		background: var(--color--card-background);
-		box-shadow: var(--card-shadow);
-		color: var(--color--text);
-		border-radius: 10px;
-		transition: all 0.4s ease;
-		position: relative;
-		overflow: hidden;
-		width: 100%;
+    @use '$lib/scss/breakpoints' as bp;
 
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
+    .posts{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        border-radius: 10px 0 0 10px;
 
-		text-decoration: none;
+    }
+    
+    .post-card {
+        display: flex;
+        flex-direction: column;
+        background: #fff;
+        overflow: hidden;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease-in-out;
+        text-decoration: none;
+        color: inherit;
+        border-radius: 10px 10px 10px 10px;
 
-		&[href],
-		&[onclick] {
-			cursor: pointer;
-			&:hover {
-				box-shadow: var(--card-shadow-hover);
-				transform: scale(1.01);
-			}
-		}
-	}
+    
+        &:hover {
+            transform: scale(1.02);
+        }
+    
+        .image-container {
+            flex: 1;
+            width: 100%;
+            height: 100%;
+		    overflow: hidden;
 
-	.body {
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		padding: 20px 20px;
-		flex: 1 0 50%;
-		background-color: white;
-		color: black;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    
+        .content {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 20px;
+            align-items: flex-start;
+            word-break: keep-all;
+    
+            .title {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                font-size: 1.2rem;
+                font-weight: 700;
+                color: black;
+            }
+    
+            .date {
+                font-size: 0.9rem;
+                color: #666;
+                margin-bottom: 0.5rem;
+            }
+    
+            .excerpt {
+                font-size: 1rem;
+                color: #444;
+            }
+        }
+    }
+    
+    @include bp.for-tablet-portrait-up {
+        .post-card {
+            flex-direction: row;
 
-		.content {
-			display: flex;
-			flex-direction: column;
-			flex: 1;
-		}
-	}
+            .image-container {
+                width: 50%;
+            }
 
-	.image {
-		position: relative;
-		flex: 1 0 max(50%, 330px);
-		// height: min(100%, 300px);
-		min-height: 280px;
-		max-height: 350px;
-	}
-
-	:global(.card [slot='image']) {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		position: absolute;
-	}
+            .content {
+                width: 50%;
+                padding: 1.5rem;
+            }
+        }
+    }
 </style>
+    

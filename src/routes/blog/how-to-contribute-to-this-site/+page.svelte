@@ -7,8 +7,6 @@
 	import Toc from '$lib/components/atoms/Toc.svelte';
     import PrevNextPost from '$lib/components/singletons/PrevNextPost.svelte';
     import PagesWrapper from '$lib/components/atoms/PagesWrapper.svelte';
-
-    console.log(data.allMetadata)
 </script>
 
 <Post
@@ -21,7 +19,7 @@
 	contributor={data.meta.contributor}
 	contributorSlug={data.meta.contributorSlug}
 >
-<PagesWrapper heading='Table of Contents'>
+<PagesWrapper>
 	<div class="wrapper">
 		<Toc class="toc" />
 		<div id="toc-contents" class="content-preview">
