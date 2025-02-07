@@ -156,12 +156,6 @@ tags:
 		padding-top: 1.5rem;
 	}
 
-	h3 {
-		font-size: 1.3rem;
-		font-weight: bold;
-		padding-top: 1rem;
-	}
-
 	p {
 		font-size: 1rem;
 		padding-top: 1rem;
@@ -174,33 +168,13 @@ tags:
 		color: rgba(255, 49, 0, 1);
 	}
 
-	ul {
-		display: flex;
-		flex-direction: column;
-		list-style-type: disc;
-		margin: 0;
-		padding-left: 1.5rem;
-		word-break: keep-all;
-	}
-
-	ul li {
-		margin: 0.25rem 0;
-		word-break: keep-all;
-	}
-
 	.content-preview > p,
-	.content-preview > ul,
-	.content-preview > h2,
-	.content-preview > h3 {
+	.content-preview > h2 {
 		margin-bottom: 1rem;
 	}
 
 	h2:not(:first-of-type) {
 		padding-top: 1.5rem;
-	}
-
-	img {
-		border-radius: 24px;
 	}
 
 	@include bp.for-desktop-up {
