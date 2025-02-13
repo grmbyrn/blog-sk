@@ -1,6 +1,5 @@
 <script lang="ts">
     export let data;
-    import { postsMetadata } from '$lib/data/postMetadata';
     import Toc from '$lib/components/atoms/Toc.svelte';
     import Callout from "$lib/components/molecules/Callout.svelte";
     import Image from "$lib/components/atoms/Image.svelte";
@@ -10,14 +9,14 @@
 </script>
 
 <Post
-    title={data.meta.title}
-    slug={data.meta.slug}
-    coverImage={data.meta.coverImage}
-    date={data.meta.date}
-    tags={data.meta.tags}
-    excerpt={data.meta.excerpt}
-    contributor={data.meta.contributor}
-    contributorSlug={data.meta.contributorSlug}
+    title={data._meta.title}
+    slug={data._meta.slug}
+    coverImage={data._meta.coverImage}
+    date={data._meta.date}
+    tags={data._meta.tags}
+    excerpt={data._meta.excerpt}
+    contributor={data._meta.contributor}
+    contributorSlug={data._meta.contributorSlug}
 >
 <a href="https://www.pexels.com/photo/shallow-focus-photography-of-black-and-silver-compasses-on-top-of-map-1203808">
     Photo by Alex Andrews.
@@ -101,7 +100,7 @@
             </div>
         </div>
     </PagesWrapper>
-    <PrevNextPost currentPage={data.meta.slug} {data} />
+    <PrevNextPost currentPage={data._meta.slug} {data} />
 </Post>
 
 <style lang="scss">

@@ -1,24 +1,39 @@
-import { postsMetadata } from '$lib/data/postMetadata';
+import { getAllPostsMetadata } from '$lib/data/postMetadata';
+import type { PostMetadata } from '$lib/data/postMetadata';
 
 export const load = async () => {
-	const posts_paths = Object.keys(import.meta.glob('/src/routes/blog/*/+page.svelte'));
+	// Await all metadata as an array
+	const allMetadata: PostMetadata[] = await getAllPostsMetadata();
 
-	const unsorted_posts = await Promise.all(
-		posts_paths.map(async (path) => {
-			const slug = path.split('/').at(-2) ?? '';
-			const metadata = postsMetadata[slug] || { title: 'Unknown Title', date: '', coverImage: '' };
-
-			const validDate = new Date(metadata.date);
-			if (isNaN(validDate.getTime())) {
-				throw new Error(`Invalid date in post: ${slug}`);
-			}
-
-			return { slug, title: metadata.title, date: validDate, coverImage: metadata.coverImage };
-		})
+	// Get all blog post paths (assuming each blog post has a +page.svelte)
+	const postsPaths = Object.keys(
+		import.meta.glob('/src/routes/blog/*/+page.svelte')
 	);
 
-	// Sort posts by date
-	const posts = unsorted_posts.sort((p, q) => q.date.getTime() - p.date.getTime());
+	// Build a set of slugs from the blog post paths
+	const validSlugs = new Set(
+		postsPaths.map((path) => path.split('/').at(-2) ?? '')
+	);
+
+	// Filter the metadata to include only posts that have a corresponding +page.svelte file
+	const validMetadata = allMetadata.filter((meta) => validSlugs.has(meta.slug));
+
+	// Map over the valid metadata to build your posts array
+	const unsortedPosts = validMetadata.map((meta) => {
+		const validDate = new Date(meta.date);
+		if (isNaN(validDate.getTime())) {
+			throw new Error(`Invalid date in post: ${meta.slug}`);
+		}
+		return {
+			slug: meta.slug,
+			title: meta.title,
+			date: validDate,
+			coverImage: meta.coverImage
+		};
+	});
+
+	// Sort posts by date (newest first)
+	const posts = unsortedPosts.sort((a, b) => b.date.getTime() - a.date.getTime());
 
 	return { posts };
 };

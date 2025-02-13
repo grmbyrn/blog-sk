@@ -8,14 +8,14 @@
 </script>
 
 <Post
-	title={data.meta.title}
-	slug={data.meta.slug}
-	coverImage={data.meta.coverImage}
-	date={data.meta.date}
-	tags={data.meta.tags}
-	excerpt={data.meta.excerpt}
-	contributor={data.meta.contributor}
-	contributorSlug={data.meta.contributorSlug}
+	title={data._meta.title}
+	slug={data._meta.slug}
+	coverImage={data._meta.coverImage}
+	date={data._meta.date}
+	tags={data._meta.tags}
+	excerpt={data._meta.excerpt}
+	contributor={data._meta.contributor}
+	contributorSlug={data._meta.contributorSlug}
 >
 	<PagesWrapper>
 		<div class="wrapper">
@@ -60,7 +60,7 @@
 			</div>
 		</div>
 	</PagesWrapper>
-	<PrevNextPost currentPage={data.meta.slug} {data} />
+	<PrevNextPost currentPage={data._meta.slug} {data} />
 </Post>
 
 <style lang="scss">

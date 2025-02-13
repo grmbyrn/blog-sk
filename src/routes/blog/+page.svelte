@@ -1,22 +1,24 @@
 <script lang="ts">
-	import { postsMetadata } from '$lib/data/postMetadata';
+	export let data;
+
 	import BlogPreview from '$lib/components/molecules/BlogPreview.svelte';
 	import SearchBar from '$lib/components/singletons/SearchBar.svelte';
-	// Convert posts object to array
-    let allPosts = Object.values(postsMetadata);
-    let filteredPosts = allPosts;
-    function handleSearch(event: CustomEvent<string>) {
-        const searchTerm = event.detail.toLowerCase();
-        
-        if (!searchTerm) {
-            filteredPosts = allPosts;
-            return;
-        }
-        filteredPosts = allPosts.filter(post => 
-            post.title.toLowerCase().includes(searchTerm) ||
-            post.excerpt.toLowerCase().includes(searchTerm)
-        );
-    }
+
+	let allPosts = data.allMetadata;
+	let filteredPosts = allPosts;
+
+	function handleSearch(event: CustomEvent<string>) {
+		const searchTerm = event.detail.toLowerCase();
+		if (!searchTerm) {
+			filteredPosts = allPosts;
+			return;
+		}
+		filteredPosts = allPosts.filter(
+			(post) =>
+				post.title.toLowerCase().includes(searchTerm) ||
+				post.excerpt.toLowerCase().includes(searchTerm)
+		);
+	}
 </script>
 
 <svelte:head>
@@ -78,7 +80,7 @@
 			width: 1100px;
 		}
 
-		h1 {
+		h2 {
 			padding-bottom: 1rem;
 			font-size: 36px;
 
