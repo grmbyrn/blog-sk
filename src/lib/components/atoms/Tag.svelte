@@ -5,7 +5,7 @@
 	}
 
 	let { tag, children }: Props = $props();
-	console.log(tag)
+
 </script>
 
 <div class="tag">

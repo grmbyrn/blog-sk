@@ -1,23 +1,23 @@
-import { postsMetadata } from '$lib/data/postMetadata';
+// src/routes/contributor/+layout.server.ts
+import { getAllPostsMetadata } from '$lib/data/postMetadata';
 
 export const load = async () => {
-	const posts_paths = Object.keys(import.meta.glob('/src/routes/blog/*/+page.svelte'));
+	// Await the array of post metadata
+	const allMetadata = await getAllPostsMetadata();
 
-	const unsorted_posts = await Promise.all(
-		posts_paths.map(async (path) => {
-			const link = path.split('/').at(-2) ?? '';
-			const metadata = postsMetadata[link] || { title: 'Unknown Title', date: '', image: '' };
+	// Map over the metadata array to build the posts array
+	const unsorted_posts = allMetadata.map((metadata) => {
+		const link = metadata.slug;
+		const validDate = new Date(metadata.date);
+		if (isNaN(validDate.getTime())) {
+			throw new Error(`Invalid date in post: ${link}`);
+		}
 
-			const validDate = new Date(metadata.date);
-			if (isNaN(validDate.getTime())) {
-				throw new Error(`Invalid date in post: ${link}`);
-			}
+		// Use coverImage instead of image
+		return { link, title: metadata.title, date: validDate, image: metadata.coverImage };
+	});
 
-			return { link, title: metadata.title, date: validDate, image: metadata.image };
-		})
-	);
-
-	// Sort posts by date
+	// Sort posts by date (newest first)
 	const posts = unsorted_posts.sort((p, q) => q.date.getTime() - p.date.getTime());
 
 	return { posts };
