@@ -8,8 +8,12 @@ const OUTPUT_FILE = 'static/blogMetadata.json';
 type BlogMetadata = {
 	title: string;
 	date: string;
-	coverImage?: string;
-	excerpt?: string;
+	coverImage: string;
+	excerpt: string;
+	slug: string;
+	contributor: string;
+	contributorSlug: string;
+	tags: string[];
 };
 
 async function generateMetadata() {
