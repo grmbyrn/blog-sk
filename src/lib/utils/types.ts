@@ -77,3 +77,14 @@ export type Post = {
 	categories: Categories[];
 	published: boolean;
 };
+
+export type BlogMetadata = {
+	title: string;
+	date: string;
+	coverImage: string;
+	excerpt: string;
+	slug: string;
+	contributor: string;
+	contributorSlug: string;
+	tags: string[];
+};

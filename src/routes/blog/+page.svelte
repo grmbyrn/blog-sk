@@ -3,20 +3,32 @@
 	import BlogPreview from '$lib/components/molecules/BlogPreview.svelte';
 	import SearchBar from '$lib/components/singletons/SearchBar.svelte';
 	// Convert posts object to array
-    let allPosts = Object.values(postsMetadata);
-    let filteredPosts = allPosts;
-    function handleSearch(event: CustomEvent<string>) {
-        const searchTerm = event.detail.toLowerCase();
-        
-        if (!searchTerm) {
-            filteredPosts = allPosts;
-            return;
-        }
-        filteredPosts = allPosts.filter(post => 
-            post.title.toLowerCase().includes(searchTerm) ||
-            post.excerpt.toLowerCase().includes(searchTerm)
-        );
-    }
+	let allPosts = Object.values(postsMetadata);
+	let filteredPosts = allPosts;
+	function handleSearch(event: CustomEvent<string>) {
+		const searchTerm = event.detail.toLowerCase();
+
+		if (!searchTerm) {
+			filteredPosts = allPosts;
+			return;
+		}
+		filteredPosts = allPosts.filter(
+			(post) =>
+				post.title.toLowerCase().includes(searchTerm) ||
+				post.excerpt.toLowerCase().includes(searchTerm)
+		);
+	}
+
+	import type { BlogPost, Contributor } from '$lib/utils/types';
+
+	export let data: {
+		allPosts: BlogPost[];
+		allContributors: Contributor[];
+		error: string | null;
+	};
+	let latestPosts = data.allPosts;
+
+	console.log(data.allPosts);
 </script>
 
 <svelte:head>
@@ -28,7 +40,24 @@
 		<h2>All Posts</h2>
 		<SearchBar on:search={handleSearch} />
 	</div>
-	<div class="grid">
+	{#if latestPosts && latestPosts.length > 0}
+		<div class="container">
+			<h2>Latest articles</h2>
+			<div class="grid">
+				{#each latestPosts as post}
+					<a href="/blog/{post.slug}">
+						{#if post.coverImage}
+							<BlogPreview post_data={post} />
+						{/if}
+					</a>
+				{/each}
+			</div>
+			<div class="link-container">
+				<a href="/blog">All articles</a>
+			</div>
+		</div>
+	{/if}
+	<!-- <div class="grid">
 		{#each filteredPosts as post}
 			<a href="/blog/{post.slug}">
 				{#if post.coverImage}
@@ -36,7 +65,7 @@
 				{/if}
 			</a>
 		{/each}
-	</div>
+	</div> -->
 </div>
 
 <style lang="scss">
@@ -76,15 +105,6 @@
 
 		@include bp.for-desktop-up {
 			width: 1100px;
-		}
-
-		h1 {
-			padding-bottom: 1rem;
-			font-size: 36px;
-
-			@include bp.for-tablet-portrait-up {
-				padding-bottom: 0px;
-			}
 		}
 
 		@include bp.for-tablet-portrait-up {

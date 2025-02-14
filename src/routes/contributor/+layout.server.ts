@@ -13,7 +13,7 @@ export const load = async () => {
 				throw new Error(`Invalid date in post: ${link}`);
 			}
 
-			return { link, title: metadata.title, date: validDate, image: metadata.image };
+			return { link, title: metadata.title, date: validDate, image: metadata.coverImage };
 		})
 	);
 

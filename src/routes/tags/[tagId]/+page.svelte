@@ -1,17 +1,17 @@
 <script lang="ts">
-    export let data;
-    import TagCard from '$lib/components/atoms/TagCard.svelte'
+	export let data;
+	import TagCard from '$lib/components/atoms/TagCard.svelte';
 
-    const { tag, filteredPosts } = data;
+	const { tag, filteredPosts } = data;
 </script>
 
 <div class="container">
-    {#if filteredPosts && filteredPosts.length}
-        <h1>{tag}</h1>
-		<TagCard {filteredPosts}/>
-    {:else}
-        <p>No posts found for this tag.</p>
-    {/if}
+	{#if filteredPosts && filteredPosts.length}
+		<h1>{tag}</h1>
+		<TagCard {filteredPosts} />
+	{:else}
+		<p>No posts found for this tag.</p>
+	{/if}
 </div>
 
 <style lang="scss">

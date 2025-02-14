@@ -92,6 +92,8 @@
 		background-color: #282c34 !important;
 		border: 1px solid gray;
 		margin: 30px 0;
+		max-width: 750px;
+		overflow: hidden;
 
 		:global(pre) {
 			overflow-x: auto;

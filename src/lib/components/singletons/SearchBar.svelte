@@ -1,41 +1,41 @@
 <script lang="ts">
-    import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher } from 'svelte';
 	import Icon from '@iconify/svelte';
 
-    const dispatch = createEventDispatcher<{
-        search: string;
-    }>();
+	const dispatch = createEventDispatcher<{
+		search: string;
+	}>();
 
-    let searchTerm = '';
+	let searchTerm = '';
 
-    function handleSearch() {
-        dispatch('search', searchTerm);
-    }
+	function handleSearch() {
+		dispatch('search', searchTerm);
+	}
 
-    function handleInput() {
-        handleSearch();
-    }
+	function handleInput() {
+		handleSearch();
+	}
 </script>
 
 <div class="search-bar-container">
-		<div class="input-wrapper">
-			<div >
-				<input
-					type="text"
-					bind:value={searchTerm}
-					on:input={handleInput}
-					placeholder="Type to filter articles"
-				/>
-			</div>
-			<div>
-				<Icon
-					icon="heroicons:magnifying-glass-16-solid"
-					width="28"
-					height="28"
-					style="color: rgba(245, 245, 245, 0.08);"
-				/>
-			</div>
+	<div class="input-wrapper">
+		<div>
+			<input
+				type="text"
+				bind:value={searchTerm}
+				on:input={handleInput}
+				placeholder="Type to filter articles"
+			/>
 		</div>
+		<div>
+			<Icon
+				icon="heroicons:magnifying-glass-16-solid"
+				width="28"
+				height="28"
+				style="color: rgba(245, 245, 245, 0.08);"
+			/>
+		</div>
+	</div>
 </div>
 
 <style lang="scss">

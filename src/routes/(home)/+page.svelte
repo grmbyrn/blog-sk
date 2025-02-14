@@ -6,22 +6,22 @@
 	import type { BlogPost, Contributor } from '$lib/utils/types';
 
 	export let data: {
-		posts: BlogPost[];
+		allPosts: BlogPost[];
 		allContributors: Contributor[];
 		error: string | null;
 	};
-	let filteredPosts = data.posts;
+	let latestPosts = data.allPosts.slice(0, 3);
 </script>
 
 <Hero />
 <WhyContribute />
 <Contributors contributors={data.allContributors} error={data.error} />
 
-{#if filteredPosts && filteredPosts.length > 0}
+{#if latestPosts && latestPosts.length > 0}
 	<div class="container">
 		<h2>Latest articles</h2>
 		<div class="grid">
-			{#each filteredPosts as post}
+			{#each latestPosts as post}
 				<a href="/blog/{post.slug}">
 					{#if post.coverImage}
 						<BlogPreview post_data={post} />

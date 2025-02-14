@@ -1,24 +1,19 @@
-import { postsMetadata } from '$lib/data/postMetadata';
+import fs from 'fs';
+import path from 'path';
+import type { BlogMetadata } from '$lib/utils/types';
 
 export const load = async () => {
-	const posts_paths = Object.keys(import.meta.glob('/src/routes/blog/*/+page.svelte'));
+	const metadataPath = path.resolve('static/blogMetadata.json');
 
-	const unsorted_posts = await Promise.all(
-		posts_paths.map(async (path) => {
-			const slug = path.split('/').at(-2) ?? '';
-			const metadata = postsMetadata[slug] || { title: 'Unknown Title', date: '', coverImage: '' };
+	if (!fs.existsSync(metadataPath)) {
+		throw new Error("Metadata file not found. Run 'npm run generate-metadata'.");
+	}
 
-			const validDate = new Date(metadata.date);
-			if (isNaN(validDate.getTime())) {
-				throw new Error(`Invalid date in post: ${slug}`);
-			}
+	const metadata: BlogMetadata[] = JSON.parse(fs.readFileSync(metadataPath, 'utf-8'));
 
-			return { slug, title: metadata.title, date: validDate, coverImage: metadata.coverImage };
-		})
+	const allPosts = metadata.sort(
+		(a: BlogMetadata, b: BlogMetadata) => new Date(b.date).getTime() - new Date(a.date).getTime()
 	);
 
-	// Sort posts by date
-	const posts = unsorted_posts.sort((p, q) => q.date.getTime() - p.date.getTime());
-
-	return { posts };
+	return { allPosts };
 };
